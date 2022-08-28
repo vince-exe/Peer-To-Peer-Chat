@@ -19,16 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="net_common.h" />
-    <ClInclude Include="net_message.h" />
-    <ClInclude Include="net_tsqueu.h" />
-    <ClInclude Include="old_net.h" />
+    <ClCompile Include="SimpleClient.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{3de60e6b-02ca-4fd2-abc4-d00c2ed839d0}</ProjectGuid>
-    <RootNamespace>NetCommon</RootNamespace>
+    <ProjectGuid>{50247e37-a3b5-4cb8-89af-718dbec764a6}</ProjectGuid>
+    <RootNamespace>NetClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -77,16 +74,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Programs\Repository-GitHub\MyNotes\InternetC++\NetCommon;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Programs\Repository-GitHub\MyNotes\InternetC++\NetCommon;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Programs\Repository-GitHub\MyNotes\InternetC++\NetCommon;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\Programs\Repository-GitHub\MyNotes\InternetC++\NetCommon;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
