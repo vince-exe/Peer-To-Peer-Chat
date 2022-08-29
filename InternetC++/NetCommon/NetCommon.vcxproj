@@ -19,8 +19,11 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="net_client.h" />
     <ClInclude Include="net_common.h" />
+    <ClInclude Include="net_connection.h" />
     <ClInclude Include="net_message.h" />
+    <ClInclude Include="net_server.h" />
     <ClInclude Include="net_tsqueu.h" />
     <ClInclude Include="old_net.h" />
   </ItemGroup>
@@ -77,16 +80,16 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vincenzo\OneDrive\Documenti\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vincenzo\OneDrive\Documenti\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vincenzo\OneDrive\Documenti\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>D:\Programs\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>C:\Users\Vincenzo\OneDrive\Documenti\C++Libraries\asio-1.24.0\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
