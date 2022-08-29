@@ -15,9 +15,9 @@ namespace olc {
 		protected:
 			/* asio context handle the data transfer */
 			asio::io_context m_context;
-
+			
 			/* thread to execute the context commands, without blocking the code */
-			sts::thread thrContext;
+			std::thread thrContext;
 
 			/* hardware socket connected to the server */
 			asio::ip::tcp::socket m_socket;
@@ -30,25 +30,65 @@ namespace olc {
 			tsqueue<owned_message<T>> m_qMessagesIn;
 
 		public:
+			client_interface() : m_socket(m_context) {
+
+			}
+			
+			virtual ~client_interface() {
+				this->disconnect();
+			}
+
 			/* connect to server with hostname/ip-address and port */
 			bool connect(const std::string& host, const uint16_t port) const {
 
-				return false;
+				try {
+
+					/* create connection */
+					this->m_connection = std::make_unique<connection<T>>();
+
+					/* resolve hostname/ip-address into tangiable physical address */
+					asio::ip::tcp::resolver resolver(this->m_context);
+					auto m_endpoints = resolver.resolve(host, std::to_string(port));
+
+					/* tell to the connection object to connect to the server */
+					this->m_connection->connectToServer(m_endpoints);
+
+					/* start context thread */
+					this->thrContext = std::thread([this]() { m_context.run(); });
+
+				}
+				catch (std::exception& e) {
+					std::cerr << "Client Exception: " << e.what() << "\n";
+					return false;
+				}
+
+				return true;
 			}
 
 			void disconnect() {
+				if (this->isConnected()) {
+					this->m_connection->disconnect();
+				}
 
+				this->m_context.stop();
+				if (this->thrContext.joinable()) {
+					this->thrContext.join();
+				}
+
+				this->m_connection.release();
 			}
+		
 
 			bool isConnected() const {
-
-				return false;
+				if (this->m_connection) 
+					return this->m_connection->isConnected();
+				else 
+					return false;
 			}
 
 			/* retrieve queue of message from server */
 			tsqueue<owned_message<T>>& getIncomingMesages() {
-
-
+				return this->m_qMessagesIn;
 			}
 		};
 	}

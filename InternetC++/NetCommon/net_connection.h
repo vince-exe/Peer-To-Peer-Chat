@@ -17,14 +17,14 @@ namespace olc {
 			virtual ~connection() {}
 
 		public:
-			bool connectToServer();
+			bool connectToServer() {};
 
-			bool disconnect();
+			bool disconnect() {};
 
-			bool IsConnected() const;
+			bool IsConnected() const {};
 
 		public:
-			bool Send(const message<T>& msg);
+			bool Send(const message<T>& msg) {};
 
 		protected:
 			/* each connection has a unique socket to a remote */
