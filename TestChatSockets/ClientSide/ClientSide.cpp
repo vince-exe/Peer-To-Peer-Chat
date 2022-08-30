@@ -14,15 +14,15 @@ int main() {
     boost::system::error_code er;
     boost::asio::write(socket, boost::asio::buffer(msg), er);
 
-    if(er) {
+    if (er) {
         std::cout << "\n[ FATAL ERROR ]: " << er.message() << std::endl;
     }
 
     /* getting response from server */
     boost::asio::streambuf recvBuffer;
     boost::asio::read(socket, recvBuffer, boost::asio::transfer_all(), er);
-    
-    if(er && er != boost::asio::error::eof) {
+
+    if (er && er != boost::asio::error::eof) {
         std::cout << "\n [ FATAL ERROR ]: " << er.message() << std::endl;
     }
     else {

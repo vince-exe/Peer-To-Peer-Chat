@@ -15,17 +15,17 @@ void send(boost::asio::ip::tcp::socket& socket, const std::string& message) {
 
 int main() {
     boost::asio::io_service service;
-    
+
     /* listen for new connections */
     boost::asio::ip::tcp::acceptor acceptor_(service, boost::asio::ip::tcp::endpoint(boost::asio::ip::tcp::v4(), 8000));
-    /* create a new socket */   
+    /* create a new socket */
     boost::asio::ip::tcp::socket socket(service);
     /* wait for connection */
     acceptor_.accept(socket);
-    
+
     std::string clientMsg = read(socket);
     /* read client message */
-    std::cout<<"\n Message From Client: " <<  clientMsg << std::endl;
+    std::cout << "\n Message From Client: " << clientMsg << std::endl;
 
     /* write client message */
     send(socket, "Hello From Server");
