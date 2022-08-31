@@ -1,34 +1,28 @@
 #include <iostream>
 #include <boost/asio.hpp>
 
+#include "Client.h"
+
 int main() {
-    boost::asio::io_service io_service;
-    /* socket creation */
-    boost::asio::ip::tcp::socket socket(io_service);
-    /* connection */
-    socket.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string("127.0.0.1"), 8000));
+    Client client;
+    boost::asio::io_context context;
+    boost::asio::ip::tcp::socket socket(context);
 
-    /* request message from client */
-    const std::string msg = "Hello From Client \n";
+    if (!client.connect(socket, "127.0.0.1", 8000)) { return 1; };
 
-    boost::system::error_code er;
-    boost::asio::write(socket, boost::asio::buffer(msg), er);
-
-    if (er) {
-        std::cout << "\n[ FATAL ERROR ]: " << er.message() << std::endl;
+    client.send(socket, "Hello From Client Vincenzo Caliendo \n", Client::er);
+    if (Client::er) {
+        std::cerr << "Can't send message" << std::endl;
+        return 1;
     }
 
-    /* getting response from server */
-    boost::asio::streambuf recvBuffer;
-    boost::asio::read(socket, recvBuffer, boost::asio::transfer_all(), er);
-
-    if (er && er != boost::asio::error::eof) {
-        std::cout << "\n [ FATAL ERROR ]: " << er.message() << std::endl;
+    std::string msg = client.read(socket, Client::er);
+    if (Client::er) {
+        std::cerr << "Can't read message" << std::endl;
+        return 1;
     }
-    else {
-        const char* data = boost::asio::buffer_cast<const char*>(recvBuffer.data());
-        std::cout << "\nMessage From Server: " << data << std::endl;
-    }
+    
+    std::cout << "\nMessage From Server: " << msg << std::endl;
 
     return 0;
 }

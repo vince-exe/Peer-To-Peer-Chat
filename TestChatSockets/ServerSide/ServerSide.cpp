@@ -28,7 +28,7 @@ int main() {
     std::cout << "\n Message From Client: " << clientMsg << std::endl;
 
     /* write client message */
-    send(socket, "Hello From Server");
+    send(socket, "Hello From Server \n");
 
     return 0;
 }
