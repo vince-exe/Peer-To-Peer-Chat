@@ -1,12 +1,11 @@
 #include "Client.h"
-
-/* definining the error code variable */
-boost::system::error_code Client::er;
-
-bool Client::connect(boost::asio::ip::tcp::socket& socket, const char* ip, uint16_t port) {
-	/* connect the socket */
+	
+bool Client::connect(const char* ip, uint16_t port) {
+	/* allocate the socket */
+	this->socket = std::make_shared<boost::asio::ip::tcp::socket>(this->io_context);
+					
 	try {
-		socket.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(ip), port));
+		this->socket->connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address::from_string(ip), port));
 	
 		this->ip = ip; this->port = port;
 	}
@@ -19,25 +18,32 @@ bool Client::connect(boost::asio::ip::tcp::socket& socket, const char* ip, uint1
 	return true;
 }
 
-bool Client::send(boost::asio::ip::tcp::socket& socket, const std::string& msg, boost::system::error_code er) {
-	boost::asio::write(socket, boost::asio::buffer(msg), er);
+bool Client::send(const std::string& msg) {
+	boost::asio::write(*this->socket, boost::asio::buffer(msg), this->er);
 
-	return (er) ? false : true;
+	return (this->er) ? false : true;
 }
 
-std::string Client::read(boost::asio::ip::tcp::socket& socket, boost::system::error_code er) {
-	boost::asio::streambuf buffer;
-	boost::asio::read_until(socket, buffer, "\n");
-	std::string data = boost::asio::buffer_cast<const char*>(buffer.data());
-	return data;
-	/* check if his an empty message or if an error occured */
-	// return (!rBytes || er) ? false : true;
+bool Client::read_until(const std::string& del) {
+	this->readBytes = boost::asio::read_until(*this->socket, this->readBuff, del, this->er);
+	
+	/* check if the readen bytes are 0 or an errro occurred */
+	return (!this->readBytes || this->er) ? false : true;
 }
 
 const char* Client::getMessage() {
-	/*boost::asio::streambuf streamBuffer;
-	const char* data = boost::asio::buffer_cast<const char*>(this->buffer->data());
+	const char* data = boost::asio::buffer_cast<const char*>(this->readBuff.data());
 
-	return data;*/
-	return nullptr;
+	/* clear the read buffer */
+	this->readBuff.consume(this->readBytes);
+
+	return data;
+}
+
+boost::system::error_code Client::getErr() {
+	return this->er;
+}
+
+size_t Client::getReadBytes() const {
+	return this->readBytes;
 }
