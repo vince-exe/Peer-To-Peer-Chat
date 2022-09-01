@@ -11,6 +11,7 @@ enum MainOptions {
 
 int main() {
 	int opt;
+	bool run = true;
 
 	do {
 		std::cout << "\n1)Start Server\n2)Connect\n3)Exit\n\nInsert option: ";
@@ -27,13 +28,14 @@ int main() {
 
 		case MainOptions::ExitProgram:
 			std::cout << "\nThank you!!";
+			run = false;
 			break;
 
 		default:
 			std::cout << "\nInsert a valid option" << std::endl;
 			break;
 		}
-	} while (opt < 3);
+	} while (run);
 
 	return 0;
 }
