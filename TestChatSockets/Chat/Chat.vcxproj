@@ -139,6 +139,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="client.h" />
+    <ClInclude Include="client_main.h" />
+    <ClInclude Include="host_interface.h" />
+    <ClInclude Include="server.h" />
+    <ClInclude Include="server_main.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Chat.cpp" />
+    <ClCompile Include="client.cpp" />
+    <ClCompile Include="client_main.cpp" />
+    <ClCompile Include="host_interface.cpp" />
+    <ClCompile Include="server.cpp" />
+    <ClCompile Include="server_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
