@@ -1,6 +1,6 @@
 #include "Client.h"
 
-bool Client::connect(const char* ip, uint16_t port) {
+bool Chat::Client::connect(const char* ip, uint16_t port) {
 	/* allocate the socket */
 	this->socket = std::make_shared<boost::asio::ip::tcp::socket>(this->io_context);
 
@@ -14,4 +14,8 @@ bool Client::connect(const char* ip, uint16_t port) {
 	}
 
 	return true;
+}
+
+void Chat::Client::shutdown() {
+	this->socket->close();
 }

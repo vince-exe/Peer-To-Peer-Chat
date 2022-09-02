@@ -1,4 +1,6 @@
 #pragma once
 
-/* main function for the client */
-int client_main();
+namespace Chat {
+	/* main function for the client */
+	void client_main();
+}

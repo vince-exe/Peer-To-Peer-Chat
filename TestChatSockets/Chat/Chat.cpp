@@ -19,11 +19,11 @@ int main() {
 
 		switch (opt) {
 		case MainOptions::StartServer:
-			server_main();
+			Chat::server_main();
 			break;
 
 		case MainOptions::ConnectClient:
-			client_main();
+			Chat::client_main();
 			break;
 
 		case MainOptions::ExitProgram:
