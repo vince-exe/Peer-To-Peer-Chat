@@ -16,14 +16,14 @@ int main() {
 	do {
 		std::cout << "\n1)Start Server\n2)Connect\n3)Exit\n\nInsert option: ";
 		std::cin >> opt;
-
+		
 		switch (opt) {
 		case MainOptions::StartServer:
-			Chat::server_main();
+			ServerSide::server_main();
 			break;
-
+			
 		case MainOptions::ConnectClient:
-			Chat::client_main();
+			ClientSide::client_main();
 			break;
 
 		case MainOptions::ExitProgram:

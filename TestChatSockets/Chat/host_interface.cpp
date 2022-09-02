@@ -8,17 +8,16 @@ bool host_interface::send(const std::string& msg) {
 
 bool host_interface::read_until(const std::string& del) {
 	this->readBytes = boost::asio::read_until(*this->socket, this->readBuff, del, this->er);
-
+	
 	/* check if the readen bytes are 0 or an errro occurred */
-	return (!this->readBytes || this->er) ? false : true;
+	return (this->er) ? false : true;
 }
 
 const char* host_interface::getMessage() {
 	const char* data = boost::asio::buffer_cast<const char*>(this->readBuff.data());
 
 	/* clear the read buffer */
-	this->readBuff.consume(this->readBytes);
-
+	this->readBuff.consume(this->readBuff.size() + 1);
 	return data;
 }
 

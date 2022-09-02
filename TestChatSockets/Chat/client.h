@@ -2,8 +2,12 @@
 
 #include "host_interface.h"
 
-namespace Chat {
+namespace ClientSide {
+
 	class Client : public host_interface {
+	private:
+		bool is_open;
+
 	public:
 		Client() = default;
 
@@ -12,5 +16,9 @@ namespace Chat {
 
 		/* shutdown the client */
 		void shutdown();
+	
+		void setOpen(bool open);
+
+		bool isOpen() const;
 	};
 }
