@@ -7,9 +7,13 @@ void ServerSide::server_main() {
     /* create the server */
     ServerSide::Server server(8000);
 
+    std::cout << "\n[ Chat ]: Start listening for new connections..." << std::endl;
     /* listen for new connections */
     server.listen();
-    std::cout << "\nStart listening for new connections..." << std::endl;
+
+    system("CLS");
+    std::cout << "\nA client has successfully joined the chat. Type [ !disconnect ] to exit." << std::endl;
+
     /* clear the buffer */
     while (std::getchar() != '\n');
 
@@ -65,11 +69,12 @@ void ServerSide::read_operation(ServerSide::Server& server) {
 
 void ServerSide::send_operation(ServerSide::Server& server) {
     std::string message;
+    std::mutex mutex;
 
     while (server.isOpen()) {
-        std::cout << "\n> ";
+        mutex.lock();
         std::getline(std::cin, message);
-        
+        mutex.unlock();
         if (!message.length()) { continue; }
 
         server.send(message + "\n");

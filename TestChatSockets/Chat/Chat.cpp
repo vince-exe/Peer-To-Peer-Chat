@@ -14,15 +14,19 @@ int main() {
 	bool run = true;
 
 	do {
+		system("CLS");
+
 		std::cout << "\n1)Start Server\n2)Connect\n3)Exit\n\nInsert option: ";
 		std::cin >> opt;
 		
 		switch (opt) {
 		case MainOptions::StartServer:
+			system("CLS");
 			ServerSide::server_main();
 			break;
 			
 		case MainOptions::ConnectClient:
+			system("CLS");
 			ClientSide::client_main();
 			break;
 

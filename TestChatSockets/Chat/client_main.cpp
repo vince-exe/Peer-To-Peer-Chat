@@ -3,12 +3,18 @@
 #include "Client.h"
 #include "utilities.h"
 
+#include <thread>
+#include <mutex>
+
 void ClientSide::client_main() {
     ClientSide::Client client;
 
-    if (!client.connect("127.0.0.1", 8000)) { return; };
+    if (!client.connect("127.0.0.1", 8000)) { 
+        std::cout << "\n[ ERRROR ]: " << client.getErr().message() << std::endl;
+        return; 
+    };
     
-    std::cout << "\nSuccessfully connected to the Server" << std::endl;
+    std::cout << "\n[ Chat ]: Successfully connected to the Server. Type [ !disconnect ] to exit." << std::endl;
     /* clear the buffer */
     while (std::getchar() != '\n');
 
@@ -43,11 +49,12 @@ void ClientSide::client_main() {
 
 void ClientSide::send_operation(ClientSide::Client& client) {
     std::string message;
+    std::mutex mutex;
 
     while (client.isOpen()) {
-        std::cout << "\n> ";
+        mutex.lock();
         std::getline(std::cin, message);
-
+        mutex.unlock();
         if (!message.length()) { continue; }
 
         client.send(message + "\n");

@@ -9,7 +9,6 @@ bool ClientSide::Client::connect(const char* ip, uint16_t port) {
 	}
 	/* catch connection exceptions */
 	catch (boost::system::system_error const& e) {
-		std::cerr << e.what() << std::endl;
 		return false;
 	}
 
