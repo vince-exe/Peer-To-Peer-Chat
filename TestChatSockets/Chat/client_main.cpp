@@ -9,9 +9,18 @@
 void ClientSide::client_main() {
     ClientSide::Client client;
 
-    if (!client.connect("127.0.0.1", 8000)) { 
-        std::cout << "\n[ ERRROR ]: " << client.getErr().message() << std::endl;
-        return; 
+    std::string ipAddress;
+    int port;
+
+    std::cout << "\n[ Ip Address ]: ";
+    std::cin >> ipAddress;
+
+    port = ChatUtilities::getPort(ChatUtilities::MIN_PORT, ChatUtilities::MAX_PORT);
+
+    system("CLS");
+    if (!client.connect(ipAddress, port)) { 
+        std::cout << "\n[ ERROR ]: The server isn't reachable, "; system("PAUSE");
+        return;
     };
     
     std::cout << "\n[ Chat ]: Successfully connected to the Server. Type [ !disconnect ] to exit." << std::endl;

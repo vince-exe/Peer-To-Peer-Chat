@@ -4,9 +4,13 @@
 #include "utilities.h"
 
 void ServerSide::server_main() {
-    /* create the server */
-    ServerSide::Server server(8000);
 
+    int port = ChatUtilities::getPort(ChatUtilities::MIN_PORT, ChatUtilities::MAX_PORT);
+
+    /* create the server */
+    ServerSide::Server server(port);
+
+    system("CLS");
     std::cout << "\n[ Chat ]: Start listening for new connections..." << std::endl;
     /* listen for new connections */
     server.listen();

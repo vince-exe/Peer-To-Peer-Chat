@@ -1,6 +1,6 @@
 #include "Client.h"
 
-bool ClientSide::Client::connect(const char* ip, uint16_t port) {
+bool ClientSide::Client::connect(const std::string& ip, uint16_t port) {
 	/* allocate the socket */
 	this->socket = std::make_shared<boost::asio::ip::tcp::socket>(this->io_context);
 
