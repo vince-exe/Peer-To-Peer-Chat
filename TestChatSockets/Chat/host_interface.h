@@ -3,15 +3,15 @@
 #include <boost/asio.hpp>
 
 #include <iostream>
+#include <string>
 #include <memory>
 
 class host_interface {
 protected:
 	/* context to execure the socket work */
 	boost::asio::io_context io_context;
-
-	/* buffer used to store the read informations */
-	boost::asio::streambuf readBuff;
+	
+	std::string message;
 
 	/* used to check if an operation went wrong */
 	boost::system::error_code er;
@@ -36,7 +36,7 @@ public:
 
 		Warning: Use this method only if the 'read' operation went fine
 	*/
-	const char* getMessage();
+	std::string getMessage();
 
 	/* return the boost::system::error_code object */
 	boost::system::error_code getErr();

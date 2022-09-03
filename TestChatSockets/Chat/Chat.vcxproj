@@ -144,6 +144,7 @@
     <ClInclude Include="host_interface.h" />
     <ClInclude Include="server.h" />
     <ClInclude Include="server_main.h" />
+    <ClInclude Include="utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chat.cpp" />
@@ -152,6 +153,7 @@
     <ClCompile Include="host_interface.cpp" />
     <ClCompile Include="server.cpp" />
     <ClCompile Include="server_main.cpp" />
+    <ClCompile Include="utilities.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

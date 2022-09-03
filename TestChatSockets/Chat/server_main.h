@@ -6,6 +6,7 @@
 #include "server.h"
 
 namespace ServerSide {
+	
 	void server_main();
 
 	void read_operation(ServerSide::Server& server);

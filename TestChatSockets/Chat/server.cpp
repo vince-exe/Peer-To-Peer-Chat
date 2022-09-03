@@ -17,7 +17,6 @@ void ServerSide::Server::listen() {
 void ServerSide::Server::shutdown() {
 	this->acceptor->close();
 	this->socket->close();
-	this->is_open = false;
 }
 
 void ServerSide::Server::setOpen(bool status) {
